@@ -56,11 +56,13 @@ export default function HeroesArdientes() {
               <div
                 className="card-front"
                 style={{
-                  backgroundImage: `url(${heroe.imagen || heroe.imagenFondo})`,
+                  backgroundImage: `url(${heroe.imagen})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               >
                 <h3 className="card-title">{heroe.nombre}</h3>
-                <p className="card-subtitle">{heroe.virtud}</p>
+                <h4 className="card-subtitle">{heroe.virtud}</h4>
               </div>
 
               {/* Cara trasera */}

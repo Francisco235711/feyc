@@ -1,26 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
-  const navButtonStyle = {
-    padding: "10px 20px",
-    borderRadius: "10px",
-    border: "none",
-    backgroundColor: "#264653",
-    color: "#fff",
-    cursor: "pointer",
-    fontSize: "16px",
-    textDecoration: "none",
-    transition: "background 0.3s, transform 0.2s",
-  };
+  const location = useLocation();
 
   return (
     <nav className="navbar">
-      <Link to="/mapa" style={navButtonStyle}>
+      <Link
+        to="/mapa"
+        className={location.pathname === "/mapa" ? "active" : ""}
+      >
         🗺️ Mapa
       </Link>
-
-      <Link to="/heroes" style={navButtonStyle}>
+      <Link
+        to="/heroes"
+        className={location.pathname === "/heroes" ? "active" : ""}
+      >
         ⚔️ Héroes
       </Link>
     </nav>

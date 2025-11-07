@@ -1,20 +1,12 @@
 import React from "react";
-import virtudes from "../data/virtudes";
+import fondoMapa from "../assets/fondomapa.jpg";
 
 export default function MapaVirtudes() {
   return (
-    <div className="mapa-container">
-      <h2>🗺️ Mapa de Virtudes</h2>
-      <p>
-        Selecciona una virtud para descubrir su historia y héroes relacionados.
-      </p>
-
-      <div className="mapa-grid">
-        {virtudes.map((virtud) => (
-          <button key={virtud.id} className="mapa-item">
-            {virtud.icono} {virtud.nombre}
-          </button>
-        ))}
+    <div className="mapa-fondo">
+      <div className="mapa-contenido">
+        <h1>🗺️ Mapa de Virtudes</h1>
+        <p>Explora las sendas del alma y los caminos del bien.</p>
       </div>
     </div>
   );
