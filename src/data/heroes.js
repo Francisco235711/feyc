@@ -88,7 +88,7 @@ const heroes = [
   {
     id: 9,
     nombre: "San Maximiliano Kolbe",
-    virtud: "Caridad (Fortaleza)",
+    virtud: "Fortaleza",
     historia:
       "Sacerdote franciscano que ofreció su vida en un campo de concentración para salvar a un padre de familia. Su llamado fue vivir la caridad radical. Su prueba suprema fue la muerte voluntaria. Su transformación fue convertirse en mártir del amor. Su elixir fue el ejemplo supremo de entrega al prójimo.",
     frase: "El odio no es una fuerza creativa. Solo el amor lo es.",
