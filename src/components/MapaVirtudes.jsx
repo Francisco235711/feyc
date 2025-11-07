@@ -144,7 +144,6 @@ export default function MapaVirtudes() {
               style={{
                 width: "400px",
                 height: "200px",
-                left: 1,
                 objectFit: "contain",
                 margin: "20px 0",
               }}
