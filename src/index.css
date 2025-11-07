@@ -4,7 +4,7 @@ body {
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
-  background: none;
+  background: linear-gradient(135deg, #1a0b2e 0%, #2d1b3d 100%); /* ← Fondo bonito siempre */;
 }
 
 
@@ -48,7 +48,6 @@ body {
   color: #e9c46a;
   text-shadow: 0 0 8px rgba(233, 196, 106, 0.8);
 }
-
 
 /* ========== CHATBOT ========== */
 .chatbot-page {

@@ -17,7 +17,7 @@ export default function App() {
 
       <Routes>
         {/* Redirigimos automáticamente el inicio hacia /mapa */}
-        <Route path="/" element={<Navigate to="/mapa" replace />} />
+        <Route path="/" element={<MapaVirtudes />} />
         <Route path="/mapa" element={<MapaVirtudes />} />
         <Route path="/heroes" element={<HeroesArdientes />} />
       </Routes>
