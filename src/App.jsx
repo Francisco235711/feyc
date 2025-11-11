@@ -6,7 +6,7 @@ import HeroesArdientes from "./components/HeroesArdientes";
 import ChatbotSabio from "./components/ChatbotSabio";
 import BotonFlotanteSabio from "./components/BotonFlotanteSabio";
 import "./index.css";
-
+/*import sabioImg from "../assets/sabio.png"; // ruta que me diste*/
 export default function App() {
   const [showChatbot, setShowChatbot] = useState(false);
 

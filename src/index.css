@@ -52,32 +52,109 @@ body {
 
 /* ========== CHATBOT ========== */
 .chatbot-page {
-  background: #fffbea;
-  border: 2px solid #e9c46a;
-  border-radius: 15px;
-  padding: 20px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
   width: 90%;
   max-width: 400px;
   margin: 0 auto;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .chatbot-page h2 {
   margin-bottom: 10px;
 }
 
-.chat-body {
-  background: #fff;
-  border-radius: 8px;
-  padding: 10px;
-  height: 200px;
-  overflow-y: auto;
+/* Mago grande al abrir */
+.sabio-grande-container {
+  display: flex;
+  justify-content: center;
   margin-bottom: 10px;
 }
 
+.sabio-grande {
+  width: 150px;
+  height: auto;
+  image-rendering: pixelated;
+  animation: aparecer 0.5s ease-out;
+}
+
+/* Área de conversación */
+.chat-body {
+  border-radius: 8px;
+  padding: 10px;
+  height: 300px;
+  width: 400px;
+  margin-bottom: 10px;
+  overflow-y: auto;
+}
+
+/* Viñetas generales */
 .mensaje {
-  margin: 5px 0;
+  margin: 8px 0;
+  padding-left: 20px;
+  position: relative;
+  list-style: none;
   text-align: left;
+}
+
+.mensaje::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #f4a261;
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Respuesta del sabio con avatar y viñeta */
+.respuesta-sabio {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0;
+  animation: aparecer 0.4s ease-out;
+}
+
+.sabio-avatar {
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+}
+
+.viñeta-sabio p {
+  position: relative;
+  background: #fffbea;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: #8b5d0f;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  margin: 0;
+}
+
+.viñeta-sabio p::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-right-color: #fffbea;
+}
+
+/* Animación de entrada */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* ========== HÉROES - SCROLL HORIZONTAL CON TARJETAS GIRATORIAS ========== */

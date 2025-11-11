@@ -1,3 +1,38 @@
+# ==========================================
+# SECRETOS - NUNCA SUBIR
+# ==========================================
+.env
+backend/.env
+*.key
+config.json
+secrets/
+
+# ==========================================
+# PYTHON
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/.venv/
+backend/venv/
+backend/env/
+backend/ENV/
+*.egg-info/
+
+# Modelo embeddings (pesados)
+backend/modelo/
+
+# ==========================================
+# NODE / REACT
+# ==========================================
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
 # Logs
 logs
 *.log
@@ -7,18 +42,30 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# ==========================================
+# IDEs
+# ==========================================
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
+*.swp
+*.swo
+*.swn
 *.suo
 *.ntvs*
-*.njsproj
+*.njsproj*
 *.sln
 *.sw?
+
+# ==========================================
+# OS
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# BUILD
+# ==========================================
+backend/dist/
+feyc/
