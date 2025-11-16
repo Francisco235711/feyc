@@ -41,6 +41,41 @@ export default function HeroesArdientes() {
   };
 
   return (
+    //frase inicial de la seccion
+    <>
+      <div
+        className="texto-contenido"
+        style={{
+          textAlign: "top",
+          color: "#fff",
+          textShadow: "5px 2px 8px rgba(0,0,0,0.7)",
+          paddingTop: "4px",
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: '"Press Start 2P", cursive',
+            fontSize: "60px",
+            color: "#ffffffff",
+            textShadow: "4px 4px 0 #000",
+            marginBottom: "-5px",
+            letterSpacing: "3px",
+          }}
+        >
+          Héroes Ardientes
+        </h1>
+                <h2
+          style={{
+            fontFamily: '"Press Start 2P", cursive',
+            fontSize: "20px",
+            color: "#f4a261",
+          }}
+          >
+          Descubre las historias inspiradoras de aquellos que encarnaron las virtudes en los momentos más desafiantes
+          </h2>
+      </div>
+    
+
     <div className="heroes-wrapper">
       <div className="heroes-scroll" ref={scrollRef}>
         {heroes.map((heroe, index) => (
@@ -78,5 +113,6 @@ export default function HeroesArdientes() {
         ))}
       </div>
     </div>
+    </>
   );
 }

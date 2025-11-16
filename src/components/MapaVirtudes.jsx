@@ -4,36 +4,40 @@ import IslaPrudencia from "../assets/IslaPrudencia.png";
 import IslaTemplanza from "../assets/IslaTemplanza.png";
 import IslaJusticia from "../assets/IslaJusticia.png";
 import IslaFortaleza from "../assets/IslaFortaleza.png";
+import virtudesData from "../data/virtudes";
+import { useNavigate } from "react-router-dom";
 
 export default function MapaVirtudes() {
   const [islaSeleccionada, setIslaSeleccionada] = useState(null);
 
-  const islas = [
-    {
-      id: 1,
-      nombre: "Isla de la Fortaleza",
-      imagen: IslaFortaleza,
-      posicion: { top: "10%", left: "15%" },
-    },
-    {
-      id: 2,
-      nombre: "Isla de la Justicia",
-      imagen: IslaJusticia,
-      posicion: { top: "10%", right: "7%" },
-    },
-    {
-      id: 3,
-      nombre: "Isla de la Prudencia",
-      imagen: IslaPrudencia,
-      posicion: { bottom: "7%", left: "15%" },
-    },
-    {
-      id: 4,
-      nombre: "Isla de la Templanza",
-      imagen: IslaTemplanza,
-      posicion: { bottom: "7%", right: "7%" },
-    },
-  ];
+  // Mapear las imágenes con los datos
+  const imagenes = {
+    1: IslaFortaleza,
+    2: IslaJusticia,
+    3: IslaPrudencia,
+    4: IslaTemplanza,
+  };
+
+  const posiciones = {
+    1: { top: "10%", left: "15%" },
+    2: { top: "10%", right: "7%" },
+    3: { bottom: "7%", left: "15%" },
+    4: { bottom: "7%", right: "7%" },
+  };
+
+  // Combinar datos con imágenes y posiciones
+  const islas = virtudesData.map((virtud) => ({
+    ...virtud,
+    imagen: imagenes[virtud.id],
+    posicion: posiciones[virtud.id],
+  }));
+
+// Dentro del componente
+const navigate = useNavigate();
+
+const iniciarDesafio = (isla) => {
+  navigate(`/desafio/${isla.id}`);
+};
 
   return (
     <div
@@ -59,13 +63,18 @@ export default function MapaVirtudes() {
       >
         <h1
           style={{
-    fontFamily: '"Press Start 2P", cursive',
-    fontSize: "60px",
-    color: "#ffffffff",
-    textShadow: "4px 4px 0 #000",
-    marginBottom: "-5px",
-    letterSpacing: "3px"
-  }}>Mapa <br />de <br />Virtudes</h1>
+            fontFamily: '"Press Start 2P", cursive',
+            fontSize: "60px",
+            color: "#ffffffff",
+            textShadow: "4px 4px 0 #000",
+            marginBottom: "-5px",
+            letterSpacing: "3px",
+          }}
+        >
+          Mapa <br />
+          de <br />
+          Virtudes
+        </h1>
       </div>
 
       {islas.map((isla) => (
@@ -75,7 +84,7 @@ export default function MapaVirtudes() {
           style={{
             position: "absolute",
             ...isla.posicion,
-            width: "300px", // 👈 Área sensible reducida
+            width: "300px",
             height: "300px",
             cursor: "pointer",
             zIndex: 10,
@@ -96,13 +105,13 @@ export default function MapaVirtudes() {
             src={isla.imagen}
             alt={isla.nombre}
             style={{
-              width: "800px", // tamaño visual grande
+              width: "800px",
               height: "800px",
               objectFit: "contain",
-              pointerEvents: "none", // 👈 evita que el hover sea sobre toda la imagen
+              pointerEvents: "none",
               filter: "drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3))",
               position: "relative",
-              left: "-250px", // opcional: centra mejor la imagen dentro del área sensible
+              left: "-250px",
               top: "-250px",
             }}
           />
@@ -118,51 +127,127 @@ export default function MapaVirtudes() {
             left: 0,
             width: "100vw",
             height: "100vh",
-            background: "rgba(0, 0, 0, 0.8)",
+            background: "rgba(0, 0, 0, 0.85)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             zIndex: 1000,
+            animation: "fadeIn 0.3s ease",
           }}
         >
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: "rgba(139, 93, 15, 0.95)",
+              background: "linear-gradient(135deg, rgba(139, 93, 15, 0.95), rgba(101, 67, 33, 0.95))",
               padding: "40px",
               borderRadius: "20px",
               border: "3px solid #e0bc04",
               textAlign: "center",
               color: "white",
-              maxWidth: "500px",
+              maxWidth: "600px",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
+              animation: "slideIn 0.4s ease",
             }}
           >
-            <h2>{islaSeleccionada.nombre}</h2>
+            <h2
+              style={{
+                fontFamily: '"Press Start 2P", cursive',
+                fontSize: "24px",
+                color: "#e0bc04",
+                marginBottom: "20px",
+                textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+              }}
+            >
+              {islaSeleccionada.nombre}
+            </h2>
+
             <img
               src={islaSeleccionada.imagen}
               alt={islaSeleccionada.nombre}
               style={{
-                width: "400px",
+                width: "300px",
                 height: "200px",
                 objectFit: "contain",
                 margin: "20px 0",
+                filter: "drop-shadow(0 5px 15px rgba(224, 188, 4, 0.4))",
               }}
             />
-            <button
-              onClick={() => setIslaSeleccionada(null)}
+
+            {/* Descripción */}
+            <p
               style={{
-                marginTop: "20px",
-                padding: "10px 30px",
-                background: "#e0bc04",
-                border: "none",
-                borderRadius: "25px",
-                cursor: "pointer",
-                fontWeight: "bold",
                 fontSize: "16px",
+                lineHeight: "1.8",
+                marginBottom: "30px",
+                textAlign: "justify",
+                padding: "0 20px",
+                color: "#f0f0f0",
               }}
             >
-              Cerrar
-            </button>
+              {islaSeleccionada.descripcion}
+            </p>
+
+            {/* Contenedor de botones separados */}
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <button
+                onClick={() => setIslaSeleccionada(null)}
+                style={{
+                  padding: "12px 30px",
+                  background: "#6c757d",
+                  border: "none",
+                  borderRadius: "25px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  color: "white",
+                  transition: "all 0.3s",
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.background = "#5a6268";
+                  e.target.style.transform = "scale(1.05)";
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.background = "#6c757d";
+                  e.target.style.transform = "scale(1)";
+                }}
+              >
+                Cerrar
+              </button>
+
+              <button
+                onClick={() => iniciarDesafio(islaSeleccionada)}
+                style={{
+                  padding: "12px 30px",
+                  background: islaSeleccionada.colorBoton,
+                  border: "none",
+                  borderRadius: "25px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  color: "white",
+                  transition: "all 0.3s",
+                  boxShadow: `0 4px 8px ${islaSeleccionada.colorBoton}60`,
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = "scale(1.1)";
+                  e.target.style.boxShadow = `0 6px 12px ${islaSeleccionada.colorBoton}80`;
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = "scale(1)";
+                  e.target.style.boxShadow = `0 4px 8px ${islaSeleccionada.colorBoton}60`;
+                }}
+              >
+                🔥 Iniciar Desafío
+              </button>
+            </div>
           </div>
         </div>
       )}

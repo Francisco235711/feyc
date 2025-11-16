@@ -61,29 +61,11 @@ body {
   margin: 0 auto;
 }
 
-.chatbot-page h2 {
-  margin-bottom: 10px;
-}
-
-/* Mago grande al abrir */
-.sabio-grande-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.sabio-grande {
-  width: 150px;
-  height: auto;
-  image-rendering: pixelated;
-  animation: aparecer 0.5s ease-out;
-}
-
 /* Área de conversación */
 .chat-body {
   border-radius: 8px;
   padding: 10px;
-  height: 300px;
+  height: 400px;
   width: 400px;
   margin-bottom: 10px;
   overflow-y: auto;
@@ -91,6 +73,7 @@ body {
 
 /* Viñetas generales */
 .mensaje {
+  color:white;
   margin: 8px 0;
   padding-left: 20px;
   position: relative;
@@ -106,6 +89,20 @@ body {
   font-size: 20px;
   line-height: 1;
 }
+/*viñeta del usuario*/
+.mensaje-tu {
+  position: relative;
+  background: #e8c62f;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  margin: 0;
+  text-align: right;
+}
+
 
 /* Respuesta del sabio con avatar y viñeta */
 .respuesta-sabio {
@@ -114,12 +111,6 @@ body {
   gap: 10px;
   margin: 10px 0;
   animation: aparecer 0.4s ease-out;
-}
-
-.sabio-avatar {
-  width: 48px;
-  height: 48px;
-  image-rendering: pixelated;
 }
 
 .viñeta-sabio p {
@@ -156,6 +147,91 @@ body {
     transform: scale(1);
   }
 }
+
+/*form,input,button del chatbotsabio.jsx*/
+form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+form button {
+  background: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #1a0b2e;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #f4d74a;
+}
+
+/* ==========================================
+   ANIMACIONES DEL CHATBOT
+   ========================================== */
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animación de entrada de mensajes */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Imagen del Sabio */
+.sabio-imagen {
+  position: fixed;
+  bottom: 100px;        /* ← Cambia aquí para mover arriba/abajo */
+  left: 800px;          /* ← Cambia aquí para mover izquierda/derecha */
+  z-index: 999;
+  animation: slideInLeft 0.5s ease-out;
+}
+.sabio-imagen img {
+  width: 450px;         /* ← Cambia aquí el tamaño */
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
 
 /* ========== HÉROES - SCROLL HORIZONTAL CON TARJETAS GIRATORIAS ========== */
 
@@ -423,7 +499,20 @@ body {
   padding: 40px;
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
 }
 
-
+/*Héroes texto*/
+.texto-contenido {
+  position: relative;
+  top: 50px;
+  left: 300px;
+  margin: 0 auto;
+}
+.texto-contenido h2 {
+  position: relative;
+  right: 200px;
+  margin: 30px;
+  line-height: 1.5;
+}
 
