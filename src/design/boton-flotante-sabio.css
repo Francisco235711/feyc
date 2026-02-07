@@ -1,0 +1,55 @@
+/* Imagen del Sabio */
+.sabio-imagen {
+  position: fixed;
+  bottom: 100px;        /* ← Cambia aquí para mover arriba/abajo */
+  left: 800px;          /* ← Cambia aquí para mover izquierda/derecha */
+  z-index: 999;
+  animation: slideInLeft 0.5s ease-out;
+}
+.sabio-imagen img {
+  width: 450px;         /* ← Cambia aquí el tamaño */
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+/* ====== Botón flotante del Sabio ===== */
+.boton-flotante {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f4a261, #e63946);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 8px 20px rgba(230, 57, 70, 0.6);
+  z-index: 999;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* hover / foco (reemplaza onMouseOver/onMouseOut) */
+.boton-flotante:hover,
+.boton-flotante:focus {
+  transform: scale(1.15);
+  box-shadow: 0 12px 30px rgba(230, 57, 70, 0.8);
+  outline: none;
+}
+
+/* pequeño ajuste para accesibilidad al activar con teclado */
+.boton-flotante:active {
+  transform: scale(1.05);
+}
+
+/* si querés animación de entrada, copia/usa esta keyframe o la existente */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+/* aplicar la animación si la necesitas */
+.boton-flotante--entrar {
+  animation: slideInLeft 0.5s ease-out;
+}

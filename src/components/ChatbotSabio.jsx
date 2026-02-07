@@ -1,129 +1,148 @@
 import React, { useState, useEffect, useRef } from "react";
+import '../design/chatbot-sabio.css';
+import chatbotData from '../data/chatbot-data.json';
+import heroes from '../data/heroes';
+import versiculos from '../data/versiculos';
+import desafios from '../data/desafios';
 
 export default function ChatbotSabio() {
   const [mensaje, setMensaje] = useState("");
   const [conversacion, setConversacion] = useState([]);
   const [cargando, setCargando] = useState(false);
+  const [pasoActual, setPasoActual] = useState("inicio");
+  const [opcionesActuales, setOpcionesActuales] = useState([]);
   const chatBodyRef = useRef(null);
 
-  // 📚 CARGAR historial al montar el componente
+  // 📚 CARGAR historial o iniciar
   useEffect(() => {
     const historialGuardado = localStorage.getItem("chatbot-historial");
+    const pasoGuardado = localStorage.getItem("chatbot-paso");
     
-    if (historialGuardado) {
-      // Si hay historial guardado, cargarlo
+    if (historialGuardado && pasoGuardado) {
       setConversacion(JSON.parse(historialGuardado));
+      setPasoActual(pasoGuardado);
+      if (chatbotData[pasoGuardado]) {
+        setOpcionesActuales(chatbotData[pasoGuardado].opciones || []);
+      }
     } else {
-      // Si no hay historial, mensaje de bienvenida
-      setConversacion([
-        {
-          rol: "sabio",
-          texto: "🔥 Bienvenido, viajero del alma. Soy el Sabio del Camino. ¿Qué virtud deseas explorar hoy?",
-        },
-      ]);
+      cargarPaso("inicio", true);
     }
   }, []);
 
-  // 💾 GUARDAR historial cada vez que cambie la conversación
+  // 💾 GUARDAR historial
   useEffect(() => {
     if (conversacion.length > 0) {
-      // Guardar solo los últimos 50 mensajes para no saturar
       const ultimosMensajes = conversacion.slice(-50);
       localStorage.setItem("chatbot-historial", JSON.stringify(ultimosMensajes));
+      localStorage.setItem("chatbot-paso", pasoActual);
     }
-  }, [conversacion]);
+  }, [conversacion, pasoActual]);
 
-  // 📜 Auto-scroll al final cuando hay nuevos mensajes
+  // 📜 Auto-scroll
   useEffect(() => {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
     }
-  }, [conversacion]);
+  }, [conversacion, opcionesActuales]);
 
-  // 🗑️ Función para limpiar historial
-  const limpiarHistorial = () => {
-    localStorage.removeItem("chatbot-historial");
-    setConversacion([
-      {
-        rol: "sabio",
-        texto: "🔥 Historial limpio. Comencemos de nuevo. ¿Qué virtud deseas explorar?",
-      },
-    ]);
-  };
+  // 🎮 Cargar paso del JSON
+  const cargarPaso = (idPaso, esPrimeraCarga = false) => {
+  const datos = chatbotData[idPaso];
+  if (!datos) {
+  setConversacion(prev => [...prev, {
+    rol: "sabio",
+    texto: "❌ Error: No encontré esa información.",
+  }]);
+  cargarPaso("inicio");
+  return;
+}
 
-  const enviarMensaje = async (e) => {
-    e.preventDefault();
-    if (!mensaje.trim() || cargando) return;
+  // Si el nodo pide un héroe aleatorio
+  if (datos.type === 'hero' && datos.virtud) {
+    const pool = heroes.filter(h => h.virtud === datos.virtud);
+    const elegido = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+    const texto = elegido ? (elegido.resumen || elegido.historia || 'Historia no disponible.') : (datos.texto || 'No hay historias.');
+    setPasoActual(idPaso);
+    if (esPrimeraCarga) {
+      setConversacion([{ rol: 'sabio', texto }]);
+    } else {
+      setConversacion(prev => [...prev, { rol: 'sabio', texto }]);
+    }
+    setOpcionesActuales(datos.opciones || []);
+    return;
+  }
 
-    const pregunta = mensaje.trim();
-    setConversacion((prev) => [...prev, { rol: "usuario", texto: pregunta }]);
-    setMensaje("");
+  if (datos.type === 'versiculo' && datos.virtud) {
+  const pool = versiculos.filter(v => v.virtud === datos.virtud);
+  const elegido = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+  const texto = elegido ? elegido.texto : (datos.texto || 'Versículo no disponible.');
+  setPasoActual(idPaso);
+    if (esPrimeraCarga) {
+      setConversacion([{ rol: 'sabio', texto }]);
+    } else {
+      setConversacion(prev => [...prev, { rol: 'sabio', texto }]);
+    }
+    setOpcionesActuales(datos.opciones || []);
+    return;
+  }
+
+  // Si el paso es un desafío, mostrarlo como tal
+  if (datos.type === 'desafio' && datos.virtud) {
+    const pool = desafios.filter(d => d.virtud === datos.virtud);
+    const elegido = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+    const texto = elegido ? elegido.texto : (datos.texto || 'Desafío no disponible.');
+    setPasoActual(idPaso);
+      if (esPrimeraCarga) {
+        setConversacion([{ rol: 'sabio', texto }]);
+      } else {
+        setConversacion(prev => [...prev, { rol: 'sabio', texto }]);
+      }
+      setOpcionesActuales(datos.opciones || []);
+      return;
+  }
+
+  // comportamiento normal:
+  setPasoActual(idPaso);
+  if (esPrimeraCarga) setConversacion([{ rol: "sabio", texto: datos.texto }]);
+  else setConversacion(prev => [...prev, { rol: "sabio", texto: datos.texto }]);
+  setOpcionesActuales(datos.opciones || []);
+};
+
+  // 🔘 Click en botón de opción
+  const manejarClickOpcion = (opcion) => {
     setCargando(true);
 
-    try {
-      const res = await fetch("http://127.0.0.1:8000/preguntar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ texto: pregunta }),
-      });
+    setConversacion(prev => [...prev, { 
+      rol: "usuario", 
+      texto: opcion.label 
+    }]);
 
-      if (!res.ok) throw new Error(`Error del servidor: ${res.status}`);
-
-      const data = await res.json();
-      const respuesta = data.respuesta || "🤔 El sabio guarda silencio...";
-
-      setConversacion((prev) => [...prev, { rol: "sabio", texto: respuesta }]);
-    } catch (error) {
-      console.error("Error completo:", error);
-      setConversacion((prev) => [
-        ...prev,
-        { rol: "sabio", texto: `⚠️ No pude conectar con el sabio. Verifica que el servidor esté corriendo.` },
-      ]);
-    } finally {
+    setTimeout(() => {
+      cargarPaso(opcion.nextId);
       setCargando(false);
-    }
+    }, 500);
   };
+
+  // 🗑️ Limpiar historial
+  const limpiarHistorial = () => {
+    localStorage.removeItem("chatbot-historial");
+    localStorage.removeItem("chatbot-paso");
+    cargarPaso("inicio", true);
+  };
+
+
 
   return (
     <div className="chatbot-page">
-      {/* 🎯 Header con botón de limpiar */}
-      <div style={{ 
-        display: "flex", 
-        justifyContent: "space-between", 
-        alignItems: "center",
-        marginBottom: "10px",
-        padding: "10px",
-        background: "rgba(255,255,255,0.1)",
-        borderRadius: "8px"
-      }}>
-        <h3 style={{ 
-          margin: 0, 
-          color: "#f4a261", 
-          fontSize: "1rem",
-          fontFamily: "'Press Start 2P', cursive"
-        }}>
-          🧙‍♂️ El Sabio
-        </h3>
-        <button
-          onClick={limpiarHistorial}
-          style={{
-            background: "#e63946",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            padding: "5px 10px",
-            cursor: "pointer",
-            fontSize: "0.7rem",
-            fontWeight: "bold",
-            fontFamily: "'Press Start 2P', cursive"
-          }}
-          title="Limpiar historial de conversación"
-        >
+      {/* Header */}
+      <div className="chatbot-header">
+        <h3>🔥 El Sabio</h3>
+        <button onClick={limpiarHistorial} className="btn-limpiar">
           🗑️ Limpiar
         </button>
       </div>
 
-      {/* 💬 Cuerpo del chat */}
+      {/* Chat body */}
       <div className="chat-body" ref={chatBodyRef}>
         {conversacion.map((msg, i) => (
           <div key={i} className={`mensaje ${msg.rol}`}>
@@ -148,21 +167,24 @@ export default function ChatbotSabio() {
             </div>
           </div>
         )}
+
+        {/* Botones de opciones */}
+        {!cargando && opcionesActuales.length > 0 && (
+          <div className="contenedor-botones">
+            {opcionesActuales.map((opcion, index) => (
+              <button
+                key={index}
+                className="boton-opcion"
+                onClick={() => manejarClickOpcion(opcion)}
+                disabled={cargando}
+              >
+                {opcion.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* 🧭 Campo de entrada */}
-      <form onSubmit={enviarMensaje}>
-        <input
-          type="text"
-          value={mensaje}
-          onChange={(e) => setMensaje(e.target.value)}
-          placeholder="Haz tu pregunta al sabio..."
-          disabled={cargando}
-        />
-        <button type="submit" disabled={cargando || !mensaje.trim()}>
-          {cargando ? "⏳" : "➤"}
-        </button>
-      </form>
     </div>
   );
 }

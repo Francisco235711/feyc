@@ -6,9 +6,8 @@ import HeroesArdientes from "./components/HeroesArdientes";
 import ChatbotSabio from "./components/ChatbotSabio";
 import BotonFlotanteSabio from "./components/BotonFlotanteSabio";
 import BarraProgreso from "./components/BarraProgreso";
-import Desafio from "./components/desafio";
 import "./index.css";
-import sabioImg from "./assets/sabio.png";
+import sabioImg from "./assets/sabio1.png";
 
 export default function App() {
   const [showChatbot, setShowChatbot] = useState(false);
@@ -22,11 +21,10 @@ export default function App() {
         <Route path="/" element={<MapaVirtudes />} />
         <Route path="/mapa" element={<MapaVirtudes />} />
         <Route path="/heroes" element={<HeroesArdientes />} />
-         <Route path="/desafio/:id" element={<Desafio />} />
       </Routes>
 
       {/* Botón flotante del sabio */}
-      <BotonFlotanteSabio onClick={() => setShowChatbot(true)} />
+      <BotonFlotanteSabio onClick={() => setShowChatbot(!showChatbot)} />
 
       {showChatbot && (
         <div
@@ -60,41 +58,6 @@ export default function App() {
             }}
           >
             <ChatbotSabio />
-            
-            {/* Botón cerrar */}
-            <button
-              onClick={() => setShowChatbot(false)}
-              style={{
-                position: "absolute",
-                top: "9px",
-                right: "9px",
-                background: "#e63946",
-                color: "white",
-                border: "none",
-                borderRadius: "50%",
-                width: "30px",
-                height: "30px",
-                cursor: "pointer",
-                fontWeight: "bold",
-                fontSize: "14px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-                transition: "transform 0.2s, background 0.2s",
-                zIndex: 1001,
-              }}
-              onMouseOver={(e) => {
-                e.target.style.transform = "scale(1.1)";
-                e.target.style.background = "#c42a35";
-              }}
-              onMouseOut={(e) => {
-                e.target.style.transform = "scale(1)";
-                e.target.style.background = "#e63946";
-              }}
-            >
-              ✖
-            </button>
           </div>
         </div>
       )}

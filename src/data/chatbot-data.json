@@ -1,0 +1,162 @@
+{
+  "inicio": {
+    "texto": "🔥 Bienvenido, viajero del alma. Soy el Sabio del Camino. ¿Qué virtud deseas explorar hoy?",
+    "opciones": [
+      { "label": "🗡️ Fortaleza", "nextId": "fortaleza" },
+      { "label": "⚖️ Justicia", "nextId": "justicia" },
+      { "label": "🧠 Prudencia", "nextId": "prudencia" },
+      { "label": "🛡️ Templanza", "nextId": "templanza" }
+    ]
+  },
+  "fortaleza": {
+    "texto": "⚔️ La Fortaleza es la virtud que nos permite resistir las dificultades y perseverar en el bien. ¿Qué aspecto te interesa?",
+    "opciones": [
+      { "label": "📖 Historia de un héroe", "nextId": "heroe_fortaleza" },
+      { "label": "🎯 Desafío diario", "nextId": "desafio_fortaleza" },
+      { "label": "📖 Versículo", "nextId": "versiculo_fortaleza" },
+      { "label": "🔙 Volver", "nextId": "inicio" }
+    ]
+  },
+  "justicia": {
+    "texto": "⚖️ La Justicia consiste en dar a cada uno lo que le corresponde. Es el fundamento de la vida en sociedad.",
+    "opciones": [
+      { "label": "📖 Historia de un héroe", "nextId": "heroe_justicia" },
+      { "label": "🎯 Desafío diario", "nextId": "desafio_justicia" },
+      { "label": "📖 Versículo", "nextId": "versiculo_justicia" },
+      { "label": "🔙 Volver", "nextId": "inicio" }
+    ]
+  },
+  "prudencia": {
+    "texto": "🧠 La Prudencia es la virtud que guía a las demás. Nos ayuda a discernir el bien y elegir los medios adecuados.",
+    "opciones": [
+      { "label": "📖 Historia de un héroe", "nextId": "heroe_prudencia" },
+      { "label": "🎯 Desafío diario", "nextId": "desafio_prudencia" },
+      { "label": "📖 Versículo", "nextId": "versiculo_prudencia" },
+      { "label": "🔙 Volver", "nextId": "inicio" }
+    ]
+  },
+  "templanza": {
+    "texto": "🛡️ La Templanza modera la atracción de los placeres y procura el equilibrio en el uso de los bienes.",
+    "opciones": [
+      { "label": "📖 Historia de un héroe", "nextId": "heroe_templanza" },
+      { "label": "🎯 Desafío diario", "nextId": "desafio_templanza" },
+      { "label": "📖 Versículo", "nextId": "versiculo_templanza" },
+      { "label": "🔙 Volver", "nextId": "inicio" }
+    ]
+  },
+"heroe_fortaleza": {
+  "type": "hero",
+  "virtud": "Fortaleza",
+  "opciones": [
+    { "label": "🎯 Quiero un desafío", "nextId": "desafio_fortaleza" },
+    { "label": "🔙 Volver", "nextId": "fortaleza" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+   
+  ]
+},
+"heroe_justicia": {
+  "type": "hero",
+  "virtud": "Justicia",
+  "opciones": [
+    { "label": "🎯 Quiero un desafío", "nextId": "desafio_justicia" },
+    { "label": "🔙 Volver", "nextId": "justicia" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+  ]
+},
+"heroe_prudencia": {
+  "type": "hero",
+  "virtud": "Prudencia",
+  "opciones": [
+    { "label": "🎯 Quiero un desafío", "nextId": "desafio_prudencia" },
+    { "label": "🔙 Volver", "nextId": "prudencia" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+  ]
+},
+"heroe_templanza": {
+  "type": "hero",
+  "virtud": "Templanza",
+  "opciones": [
+    { "label": "🎯 Quiero un desafío", "nextId": "desafio_templanza" },
+    { "label": "🔙 Volver", "nextId": "templanza" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+  ]
+},
+
+"versiculo_fortaleza": {
+  "type": "versiculo",
+  "virtud": "Fortaleza",
+  "opciones": [
+    { "label": "🎯 Desafío diario", "nextId": "desafio_fortaleza" },
+    { "label": "🔙 Volver", "nextId": "fortaleza" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+  ]
+},
+
+"versiculo_justicia": {
+  "type": "versiculo",
+  "virtud": "Justicia",
+  "opciones": [
+    { "label": "🎯 Desafío diario", "nextId": "desafio_justicia" },
+    { "label": "🔙 Volver", "nextId": "justicia" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+  ]
+},
+
+"versiculo_prudencia": {
+  "type": "versiculo",
+  "virtud": "Prudencia",
+  "opciones": [
+    { "label": "🎯 Desafío diario", "nextId": "desafio_prudencia" },
+    { "label": "🔙 Volver", "nextId": "prudencia" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+  ]
+},
+"versiculo_templanza": {
+  "type": "versiculo",
+  "virtud": "Templanza",
+  "opciones": [
+    { "label": "🎯 Desafío diario", "nextId": "desafio_templanza" },
+    { "label": "🔙 Volver", "nextId": "templanza" },
+    { "label": "🔄 Otra virtud", "nextId": "inicio" }
+  ]
+},
+
+  "desafio_fortaleza": {
+    "type": "desafio",
+    "virtud": "Fortaleza",
+    "opciones": [
+      { "label": "✅ ¡Acepto!", "nextId": "desafio_aceptado" },
+      { "label": "🔄 Otra virtud", "nextId": "inicio" }
+    ]
+  },
+  "desafio_justicia": {
+    "type": "desafio",
+    "virtud": "Justicia",
+    "opciones": [
+      { "label": "✅ ¡Acepto!", "nextId": "desafio_aceptado" },
+      { "label": "🔄 Otra virtud", "nextId": "inicio" }
+    ]
+  },
+  "desafio_prudencia": {
+    "type": "desafio",
+    "virtud": "Prudencia",
+    "opciones": [
+      { "label": "✅ ¡Acepto!", "nextId": "desafio_aceptado" },
+      { "label": "🔄 Otra virtud", "nextId": "inicio" }
+    ]
+  },
+  "desafio_templanza": {
+    "type": "desafio",
+    "virtud": "Templanza",
+    "opciones": [
+      { "label": "✅ ¡Acepto!", "nextId": "desafio_aceptado" },
+      { "label": "🔄 Otra virtud", "nextId": "inicio" }
+    ]
+  },
+  "desafio_aceptado": {
+    "texto": "🏆 ¡Excelente, valiente viajero! Cada pequeña victoria fortalece tu carácter. ¡Adelante!",
+    "opciones": [
+      { "label": "🔥 Explorar más", "nextId": "inicio" }
+    ]
+  }
+}

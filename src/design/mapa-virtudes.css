@@ -1,0 +1,326 @@
+/* ========== MAPA DE VIRTUDES ========== */
+
+.mapa-fondo {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapa-contenido {
+  text-align: center;
+  color: #fff;
+  text-shadow: 5px 2px 8px rgba(0, 0, 0, 0.7);
+  padding-top: 4px;
+  margin-top: -100px;
+}
+
+.mapa-titulo {
+  font-family: "Press Start 2P", cursive;
+  font-size: 60px;
+  color: #ffffff;
+  text-shadow: 4px 4px 0 #000;
+  margin-bottom: -5px;
+  letter-spacing: 3px;
+}
+
+/* Islas interactivas */
+.isla-contenedor {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.isla-imagen {
+  width: 800px;
+  height: 800px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+  position: relative;
+  left: -250px;
+  top: -250px;
+}
+
+/* Modal / Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-contenedor {
+  padding: 40px;
+  border-radius: 20px;
+  border: 3px solid #e0bc04;
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.4s ease;
+}
+
+.modal-titulo {
+  font-family: "Press Start 2P", cursive;
+  font-size: 24px;
+  color: #e0bc04;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.modal-imagen {
+  width: 300px;
+  height: 200px;
+  object-fit: contain;
+  margin: 20px 0;
+  filter: drop-shadow(0 5px 15px rgba(224, 188, 4, 0.4));
+}
+
+.modal-descripcion {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  text-align: justify;
+  padding: 0 20px;
+  color: #f0f0f0;
+}
+
+/* Botones del modal */
+.modal-botones {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-boton {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.modal-boton-cerrar {
+  background: #6c757d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modal-boton-cerrar:hover {
+  background: #5a6268;
+  transform: scale(1.05);
+}
+
+.modal-boton-desafio {
+  /* background dinámico desde: islaSeleccionada.colorBoton */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .mapa-titulo {
+    font-size: 40px;
+    letter-spacing: 2px;
+  }
+
+  .isla-contenedor {
+    width: 220px;
+    height: 220px;
+  }
+
+  .isla-imagen {
+    width: 600px;
+    height: 600px;
+    left: -190px;
+    top: -190px;
+  }
+
+  .modal-contenedor {
+    max-width: 500px;
+    padding: 30px;
+  }
+
+  .modal-imagen {
+    width: 250px;
+    height: 150px;
+  }
+
+  .modal-descripcion {
+    font-size: 14px;
+    padding: 0 15px;
+  }
+}
+
+/* Celulares grandes (480px - 768px) */
+@media (max-width: 768px) {
+  .mapa-titulo {
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+
+  .mapa-contenido {
+    margin-top: -50px;
+  }
+
+  .isla-contenedor {
+    width: 150px;
+    height: 150px;
+  }
+
+  .isla-imagen {
+    width: 400px;
+    height: 400px;
+    left: -125px;
+    top: -125px;
+  }
+
+  .modal-overlay {
+    padding: 20px;
+  }
+
+  .modal-contenedor {
+    max-width: 90vw;
+    padding: 25px;
+    border-radius: 15px;
+  }
+
+  .modal-titulo {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .modal-imagen {
+    width: 200px;
+    height: 120px;
+    margin: 15px 0;
+  }
+
+  .modal-descripcion {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+
+  .modal-botones {
+    gap: 10px;
+  }
+
+  .modal-boton {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Celulares pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .mapa-fondo {
+    height: 100dvh;
+  }
+
+  .mapa-titulo {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 0 #000;
+  }
+
+  .mapa-contenido {
+    margin-top: -30px;
+    padding-top: 0;
+  }
+
+  .isla-contenedor {
+    width: 100px;
+    height: 100px;
+  }
+
+  .isla-imagen {
+    width: 280px;
+    height: 280px;
+    left: -90px;
+    top: -90px;
+  }
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal-contenedor {
+    max-width: 95vw;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #e0bc04;
+  }
+
+  .modal-titulo {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .modal-imagen {
+    width: 150px;
+    height: 100px;
+    margin: 10px 0;
+  }
+
+  .modal-descripcion {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    padding: 0 5px;
+    text-align: left;
+  }
+
+  .modal-botones {
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .modal-boton {
+    width: 100%;
+    padding: 12px;
+    font-size: 13px;
+  }
+}
